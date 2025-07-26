@@ -83,3 +83,11 @@ MIT © 2025 – Projet DeskFlow
 ---
 
 > DeskFlow – Augmentez votre focus, automatisez vos routines, et domptez votre journée.
+
+## ✍️ Auteur
+
+**Yacine DEHMOUS**  
+Développeur passionné .NET & MAUI  
+[LinkedIn](www.linkedin.com/in/yacine-dehmous-ab1532171) | [GitHub](https://github.com/YacDms)
+
+Pour toute question ou collaboration, n’hésitez pas à me contacter !
