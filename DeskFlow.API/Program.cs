@@ -1,8 +1,14 @@
+using DeskFlow.API.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+// Register the ProjectService as a singleton
+builder.Services.AddSingleton<IProjectService, ProjectService>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
