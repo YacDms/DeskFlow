@@ -14,12 +14,10 @@ namespace DeskFlow.API.Services
 
         public IEnumerable<TaskItem> GetAll() => _tasks;
         public TaskItem? GetById(Guid id) => _tasks.FirstOrDefault(t => t.Id == id);
-        public TaskItem Create(TaskItem task)
+        public async Task<TaskItem?> Create(TaskItem task)
         {
-            if (_projectService.GetById(task.ProjectId) is null)
-            {
-                throw new InvalidOperationException("Projet non trouvé.");
-            }
+            if (await _projectService.GetByIdAsync(task.ProjectId) is null)
+                return null;
 
             task.Id = Guid.NewGuid();
             task.CreatedAt = DateTime.UtcNow;

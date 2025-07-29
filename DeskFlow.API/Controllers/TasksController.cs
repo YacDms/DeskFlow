@@ -24,17 +24,12 @@ namespace DeskFlow.API.Controllers
             return task is null ? NotFound() : Ok(task);
         }
         [HttpPost]
-        public ActionResult<TaskItem> Create(TaskItem task)
+        public async Task<ActionResult<TaskItem>> Create(TaskItem task)
         {
-            try
-            {
-                var created = _service.Create(task);
-                return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
-            }
-            catch (InvalidOperationException ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            var created = await _service.Create(task);
+            if(created is null)
+                return BadRequest(new { error = "Project not found !" });
+            return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
         }
         [HttpPut("{id}")]
         public IActionResult Update(Guid id, TaskItem updated)

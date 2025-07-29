@@ -1,44 +1,45 @@
 ﻿using DeskFlow.Shared.Models;
+using System.Collections.Generic;
 
 namespace DeskFlow.API.Services
 {
     public class ProjectService : IProjectService
     {
         private readonly List<Project> _projects = new();
+        
+        public Task<IEnumerable<Project>> GetAllAsync() => Task.FromResult<IEnumerable<Project>>(_projects);
 
-        public IEnumerable<Project> GetAll() => _projects;
+        public Task<Project?> GetByIdAsync(Guid id) =>
+            Task.FromResult<Project?>(_projects.FirstOrDefault(p => p.Id == id));
 
-        public Project? GetById(Guid id) =>
-            _projects.FirstOrDefault(p => p.Id == id);
-
-        public Project Create(Project project)
+        public Task<Project> CreateAsync(Project project)
         {
             project.Id = Guid.NewGuid();
             project.CreatedAt = DateTime.UtcNow;
             _projects.Add(project);
-            return project;
+            return Task.FromResult<Project>(project);
         }
 
-        public bool Update(Guid id, Project updated)
+        public Task<bool> UpdateAsync(Guid id, Project updated)
         {
-            var project = GetById(id);
-            if (project is null) return false;
+            var project = _projects.FirstOrDefault(p => p.Id == id);
+            if (project is null) return Task.FromResult<bool>(false);
 
             project.Title = updated.Title;
             project.Description = updated.Description;
             project.DueDate = updated.DueDate;
             project.Status = updated.Status;
 
-            return true;
+            return Task.FromResult<bool>(true);
         }
 
-        public bool Delete(Guid id)
+        public Task<bool> DeleteAsync(Guid id)
         {
-            var project = GetById(id);
-            if (project is null) return false;
+            var project = _projects.FirstOrDefault(p => p.Id == id);
+            if (project is null) return Task.FromResult<bool>(false);
 
             _projects.Remove(project);
-            return true;
+            return Task.FromResult<bool>(true);
         }
     }
 }
