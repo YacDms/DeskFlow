@@ -12,9 +12,9 @@ namespace DeskFlow.API.Services
             _projectService = projectService;
         }
 
-        public IEnumerable<TaskItem> GetAll() => _tasks;
-        public TaskItem? GetById(Guid id) => _tasks.FirstOrDefault(t => t.Id == id);
-        public async Task<TaskItem?> Create(TaskItem task)
+        public Task<IEnumerable<TaskItem>> GetAllAsync() => Task.FromResult<IEnumerable<TaskItem>>(_tasks);
+        public Task<TaskItem?> GetByIdAsync(Guid id) => Task.FromResult<TaskItem?>(_tasks.FirstOrDefault(t => t.Id == id));
+        public async Task<TaskItem?> CreateAsync(TaskItem task)
         {
             if (await _projectService.GetByIdAsync(task.ProjectId) is null)
                 return null;
@@ -24,10 +24,10 @@ namespace DeskFlow.API.Services
             _tasks.Add(task);
             return task;
         }
-        public bool Update(Guid id, TaskItem updated)
+        public Task<bool> UpdateAsync(Guid id, TaskItem updated)
         {
-            var task = GetById(id);
-            if (task is null) return false;
+            var task = _tasks.FirstOrDefault(t => t.Id == id);
+            if (task is null) return Task.FromResult(false);
 
             task.Title = updated.Title;
             task.Description = updated.Description;
@@ -35,16 +35,16 @@ namespace DeskFlow.API.Services
             task.Status = updated.Status;
             task.ProjectId = updated.ProjectId;
 
-            return true;
+            return Task.FromResult(true);
         }
-        public bool Delete(Guid id)
+        public Task<bool> DeleteAsync(Guid id)
         {
-            var task = GetById(id);
-            if (task is null) return false;
+            var task = _tasks.FirstOrDefault(t => t.Id == id);
+            if (task is null) return Task.FromResult(false);
 
             _tasks.Remove(task);
 
-            return true;
+            return Task.FromResult(true);
         }
     }
 }
