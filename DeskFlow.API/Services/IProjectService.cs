@@ -4,10 +4,10 @@ namespace DeskFlow.API.Services
 {
     public interface IProjectService
     {
-        IEnumerable<Project> GetAll();
-        Project? GetById(Guid id);
-        Project Create(Project project);
-        bool Update(Guid id, Project updated);
-        bool Delete(Guid id);
+        Task<IEnumerable<Project>> GetAllAsync();
+        Task<Project?> GetByIdAsync(Guid id);
+        Task<Project> CreateAsync(Project project);
+        Task<bool> UpdateAsync(Guid id, Project updated);
+        Task<bool> DeleteAsync(Guid id);
     }
 }

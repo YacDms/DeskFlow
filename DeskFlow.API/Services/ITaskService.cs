@@ -6,7 +6,7 @@ namespace DeskFlow.API.Services
     {
         IEnumerable<TaskItem> GetAll();
         TaskItem? GetById(Guid id);
-        TaskItem Create(TaskItem task);
+        Task<TaskItem?> Create(TaskItem task);
         bool Update(Guid id, TaskItem updated);
         bool Delete(Guid id);
     }
