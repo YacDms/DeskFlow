@@ -16,31 +16,34 @@ namespace DeskFlow.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<TaskItem>> GetAll() => Ok(_service.GetAll());
-        [HttpGet("{id}")]
-        public ActionResult<TaskItem> GetById(Guid id)
+        public async Task<ActionResult<IEnumerable<TaskItem>>> GetAll()
         {
-            var task = _service.GetById(id);
+            return Ok(await _service.GetAllAsync());
+        }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<TaskItem>> GetById(Guid id)
+        {
+            var task = await _service.GetByIdAsync(id);
             return task is null ? NotFound() : Ok(task);
         }
         [HttpPost]
         public async Task<ActionResult<TaskItem>> Create(TaskItem task)
         {
-            var created = await _service.Create(task);
+            var created = await _service.CreateAsync(task);
             if(created is null)
                 return BadRequest(new { error = "Project not found !" });
             return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
         }
         [HttpPut("{id}")]
-        public IActionResult Update(Guid id, TaskItem updated)
+        public async Task<IActionResult> Update(Guid id, TaskItem updated)
         {
-            var success = _service.Update(id, updated);
+            var success = await _service.UpdateAsync(id, updated);
             return success ? NoContent() : NotFound();
         }
         [HttpDelete("{id}")]
-        public IActionResult Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
-            var success = _service.Delete(id);
+            var success = await _service.DeleteAsync(id);
             return success ? NoContent() : NotFound();
         }
     }
