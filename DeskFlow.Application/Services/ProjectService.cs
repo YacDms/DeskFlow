@@ -1,7 +1,7 @@
 ﻿using DeskFlow.Shared.Models;
-using System.Collections.Generic;
+using DeskFlow.Application.Interfaces;
 
-namespace DeskFlow.API.Services
+namespace DeskFlow.Application.Services
 {
     public class ProjectService : IProjectService
     {

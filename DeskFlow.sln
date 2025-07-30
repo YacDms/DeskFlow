@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36301.6 d17.14
+VisualStudioVersion = 17.14.36301.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeskFlow.App", "DeskFlow.App\DeskFlow.App.csproj", "{2CAAFB9B-0E45-4F0A-A171-24B8777FE24B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeskFlow.API", "DeskFlow.API\DeskFlow.API.csproj", "{B594582D-AD7D-479B-9BCC-410BE24CF08E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeskFlow.Shared", "DeskFlow.Shared\DeskFlow.Shared.csproj", "{27DB0C8D-16A8-4537-BB12-E3CBB9CF5070}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeskFlow.Application", "DeskFlow.Application\DeskFlow.Application.csproj", "{7F5B5250-1ED7-4A3A-9B5C-D28DD2876C80}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{27DB0C8D-16A8-4537-BB12-E3CBB9CF5070}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27DB0C8D-16A8-4537-BB12-E3CBB9CF5070}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27DB0C8D-16A8-4537-BB12-E3CBB9CF5070}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F5B5250-1ED7-4A3A-9B5C-D28DD2876C80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F5B5250-1ED7-4A3A-9B5C-D28DD2876C80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F5B5250-1ED7-4A3A-9B5C-D28DD2876C80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F5B5250-1ED7-4A3A-9B5C-D28DD2876C80}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

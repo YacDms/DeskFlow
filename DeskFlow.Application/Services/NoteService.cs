@@ -1,6 +1,7 @@
 ﻿using DeskFlow.Shared.Models;
+using DeskFlow.Application.Interfaces;
 
-namespace DeskFlow.API.Services
+namespace DeskFlow.Application.Services
 {
     public class NoteService : INoteService
     {

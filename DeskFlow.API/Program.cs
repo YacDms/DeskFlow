@@ -1,4 +1,5 @@
-using DeskFlow.API.Services;
+using DeskFlow.Application.Interfaces;
+using DeskFlow.Application.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

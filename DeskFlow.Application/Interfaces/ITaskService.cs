@@ -1,6 +1,6 @@
 ﻿using DeskFlow.Shared.Models;
 
-namespace DeskFlow.API.Services
+namespace DeskFlow.Application.Interfaces
 {
     public interface ITaskService
     {
