@@ -12,6 +12,9 @@ builder.Services.AddSingleton<IProjectService, ProjectService>();
 // Register the TaskService as a singleton
 builder.Services.AddSingleton<ITaskService, TaskService>();
 
+// Register the NoteService as a Singleton
+builder.Services.AddSingleton<INoteService, NoteService>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
