@@ -1,10 +1,12 @@
 using DeskFlow.Application.Interfaces;
 using DeskFlow.Application.Services;
+using DeskFlow.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite("Data Source=deskflow.db"));
 builder.Services.AddControllers();
 
 // Register the ProjectService as a singleton

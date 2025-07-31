@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DeskFlow.Shared\DeskFlow.Shared.csproj" />
+    <ProjectReference Include="..\DeskFlow.Infrastructure\DeskFlow.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
