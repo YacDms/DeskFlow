@@ -1,45 +1,56 @@
 ﻿using DeskFlow.Shared.Models;
 using DeskFlow.Application.Interfaces;
+using DeskFlow.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace DeskFlow.Application.Services
 {
     public class ProjectService : IProjectService
     {
-        private readonly List<Project> _projects = new();
-        
-        public Task<IEnumerable<Project>> GetAllAsync() => Task.FromResult<IEnumerable<Project>>(_projects);
+        private readonly AppDbContext _context;
 
-        public Task<Project?> GetByIdAsync(Guid id) =>
-            Task.FromResult<Project?>(_projects.FirstOrDefault(p => p.Id == id));
+        public ProjectService(AppDbContext context)
+        {
+            _context = context;
+        }
 
-        public Task<Project> CreateAsync(Project project)
+        public async Task<IEnumerable<Project>> GetAllAsync() => await _context.Projects.ToListAsync();
+
+        public async Task<Project?> GetByIdAsync(Guid id) =>
+            await _context.Projects.FindAsync(id);
+
+        public async Task<Project> CreateAsync(Project project)
         {
             project.Id = Guid.NewGuid();
             project.CreatedAt = DateTime.UtcNow;
-            _projects.Add(project);
-            return Task.FromResult<Project>(project);
+            _context.Projects.Add(project);
+            await _context.SaveChangesAsync();
+            return project;
         }
 
-        public Task<bool> UpdateAsync(Guid id, Project updated)
+        public async Task<bool> UpdateAsync(Guid id, Project updated)
         {
-            var project = _projects.FirstOrDefault(p => p.Id == id);
-            if (project is null) return Task.FromResult<bool>(false);
+            var project = await _context.Projects.FindAsync(id);
+            if (project is null) return false;
 
             project.Title = updated.Title;
             project.Description = updated.Description;
             project.DueDate = updated.DueDate;
             project.Status = updated.Status;
 
-            return Task.FromResult<bool>(true);
+            await _context.SaveChangesAsync();
+            return true;
         }
 
-        public Task<bool> DeleteAsync(Guid id)
+        public async Task<bool> DeleteAsync(Guid id)
         {
-            var project = _projects.FirstOrDefault(p => p.Id == id);
-            if (project is null) return Task.FromResult<bool>(false);
+            var project = await _context.Projects.FindAsync(id);
+            if (project is null) return false;
 
-            _projects.Remove(project);
-            return Task.FromResult<bool>(true);
+            _context.Projects.Remove(project);
+
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 }

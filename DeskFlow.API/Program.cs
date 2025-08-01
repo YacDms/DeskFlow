@@ -1,22 +1,13 @@
-using DeskFlow.Application.Interfaces;
-using DeskFlow.Application.Services;
-using DeskFlow.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using DeskFlow.Infrastructure;
+using DeskFlow.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite("Data Source=deskflow.db"));
 builder.Services.AddControllers();
-
-// Register the ProjectService as a singleton
-builder.Services.AddSingleton<IProjectService, ProjectService>();
-
-// Register the TaskService as a singleton
-builder.Services.AddSingleton<ITaskService, TaskService>();
-
-// Register the NoteService as a Singleton
-builder.Services.AddSingleton<INoteService, NoteService>();
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure(builder.Configuration);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
