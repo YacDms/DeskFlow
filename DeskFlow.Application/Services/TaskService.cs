@@ -1,20 +1,23 @@
 ﻿using DeskFlow.Shared.Models;
 using DeskFlow.Application.Interfaces;
+using DeskFlow.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace DeskFlow.Application.Services
 {
     public class TaskService : ITaskService
     {
-        private readonly List<TaskItem> _tasks = new();
+        private readonly AppDbContext _context;
         private readonly IProjectService _projectService;
 
-        public TaskService(IProjectService projectService)
+        public TaskService(AppDbContext context)
         {
-            _projectService = projectService;
+            _context = context;
+            _projectService = new ProjectService(context);
         }
 
-        public Task<IEnumerable<TaskItem>> GetAllAsync() => Task.FromResult<IEnumerable<TaskItem>>(_tasks);
-        public Task<TaskItem?> GetByIdAsync(Guid id) => Task.FromResult<TaskItem?>(_tasks.FirstOrDefault(t => t.Id == id));
+        public async Task<IEnumerable<TaskItem>> GetAllAsync() => await _context.Tasks.ToListAsync();
+        public async Task<TaskItem?> GetByIdAsync(Guid id) => await _context.Tasks.FindAsync(id);
         public async Task<TaskItem?> CreateAsync(TaskItem task)
         {
             if (await _projectService.GetByIdAsync(task.ProjectId) is null)
@@ -22,13 +25,14 @@ namespace DeskFlow.Application.Services
 
             task.Id = Guid.NewGuid();
             task.CreatedAt = DateTime.UtcNow;
-            _tasks.Add(task);
+            _context.Tasks.Add(task);
+            await _context.SaveChangesAsync();
             return task;
         }
-        public Task<bool> UpdateAsync(Guid id, TaskItem updated)
+        public async Task<bool> UpdateAsync(Guid id, TaskItem updated)
         {
-            var task = _tasks.FirstOrDefault(t => t.Id == id);
-            if (task is null) return Task.FromResult(false);
+            var task = await _context.Tasks.FindAsync(id);
+            if (task is null) return false;
 
             task.Title = updated.Title;
             task.Description = updated.Description;
@@ -36,16 +40,19 @@ namespace DeskFlow.Application.Services
             task.Status = updated.Status;
             task.ProjectId = updated.ProjectId;
 
-            return Task.FromResult(true);
+            await _context.SaveChangesAsync();
+
+            return true;
         }
-        public Task<bool> DeleteAsync(Guid id)
+        public async Task<bool> DeleteAsync(Guid id)
         {
-            var task = _tasks.FirstOrDefault(t => t.Id == id);
-            if (task is null) return Task.FromResult(false);
+            var task = await _context.Tasks.FindAsync(id);
+            if (task is null) return false;
 
-            _tasks.Remove(task);
+            _context.Tasks.Remove(task);
+            await _context.SaveChangesAsync();
 
-            return Task.FromResult(true);
+            return true;
         }
     }
 }

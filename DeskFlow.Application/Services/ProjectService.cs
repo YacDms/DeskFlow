@@ -48,8 +48,8 @@ namespace DeskFlow.Application.Services
             if (project is null) return false;
 
             _context.Projects.Remove(project);
-
             await _context.SaveChangesAsync();
+
             return true;
         }
     }
