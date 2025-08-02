@@ -10,10 +10,10 @@ namespace DeskFlow.Application.Services
         private readonly AppDbContext _context;
         private readonly IProjectService _projectService;
 
-        public TaskService(AppDbContext context)
+        public TaskService(AppDbContext context, IProjectService projectService)
         {
             _context = context;
-            _projectService = new ProjectService(context);
+            _projectService = projectService;
         }
 
         public async Task<IEnumerable<TaskItem>> GetAllAsync() => await _context.Tasks.ToListAsync();

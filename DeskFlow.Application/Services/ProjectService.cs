@@ -23,7 +23,9 @@ namespace DeskFlow.Application.Services
         {
             project.Id = Guid.NewGuid();
             project.CreatedAt = DateTime.UtcNow;
+
             _context.Projects.Add(project);
+
             await _context.SaveChangesAsync();
             return project;
         }
