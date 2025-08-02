@@ -19,6 +19,13 @@ namespace DeskFlow.Application.Services
         public async Task<Project?> GetByIdAsync(Guid id) =>
             await _context.Projects.FindAsync(id);
 
+        public async Task<Project?> GetDetailedByIdAsync(Guid id)
+        {
+            return await _context.Projects
+                .Include(p => p.Tasks)
+                .Include(p => p.Notes)
+                .FirstOrDefaultAsync(p => p.Id == id);
+        }
         public async Task<Project> CreateAsync(Project project)
         {
             project.Id = Guid.NewGuid();

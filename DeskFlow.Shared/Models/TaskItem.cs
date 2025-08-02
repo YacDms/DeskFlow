@@ -1,4 +1,6 @@
-﻿namespace DeskFlow.Shared.Models
+﻿using System.Text.Json.Serialization;
+
+namespace DeskFlow.Shared.Models
 {
     public class TaskItem
     {
@@ -9,5 +11,7 @@
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime? DueDate { get; set; }
         public TaskStatus Status { get; set; } = TaskStatus.Todo;
+        [JsonIgnore]
+        public Project? Project { get; set; }
     }
 }

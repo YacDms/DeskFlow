@@ -27,6 +27,14 @@ public class ProjectsController : ControllerBase
         var project = await _service.GetByIdAsync(id);
         return project is null ? NotFound() : Ok(project);
     }
+    // Renamed to avoid confusion with GetById
+    // This endpoint provides detailed information about a project, including its tasks and notes.
+    [HttpGet("{id}/details")]
+    public async Task<ActionResult<Project>> GetDetailedById(Guid id) 
+    {
+        var project = await _service.GetDetailedByIdAsync(id);
+        return project is null ? NotFound() : Ok(project);
+    }
 
     [HttpPost]
     public async Task<ActionResult<Project>> Create(Project project)

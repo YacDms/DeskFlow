@@ -17,15 +17,15 @@ public class AppDbContext : DbContext
 
         // TaskItem → Project
         modelBuilder.Entity<TaskItem>()
-            .HasOne<Project>()
-            .WithMany()
+            .HasOne(t => t.Project)
+            .WithMany(p => p.Tasks)
             .HasForeignKey(t => t.ProjectId)
             .OnDelete(DeleteBehavior.Cascade);
 
         // Note → Project
         modelBuilder.Entity<Note>()
-            .HasOne<Project>()
-            .WithMany()
+            .HasOne(t => t.Project)
+            .WithMany(p => p.Notes)
             .HasForeignKey(n => n.ProjectId)
             .OnDelete(DeleteBehavior.Cascade);
     }

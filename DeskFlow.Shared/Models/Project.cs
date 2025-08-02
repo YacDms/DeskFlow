@@ -8,4 +8,6 @@ public class Project
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime? DueDate { get; set; }
     public ProjectStatus Status { get; set; } = ProjectStatus.Planned;
+    public ICollection<TaskItem> Tasks { get; set; } = new List<TaskItem>();
+    public ICollection<Note> Notes { get; set; } = new List<Note>();
 }
