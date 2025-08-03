@@ -1,6 +1,6 @@
 ﻿namespace DeskFlow.Shared.Models
 {
-    public enum TaskStatus
+    public enum TaskState
     {
         Todo,       // Task is yet to be started
         InProgress, // Task is currently being worked on

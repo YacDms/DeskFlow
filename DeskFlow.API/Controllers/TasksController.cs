@@ -1,4 +1,5 @@
 ﻿using DeskFlow.Application.Interfaces;
+using DeskFlow.Application.DTOs;
 using DeskFlow.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,18 +16,18 @@ namespace DeskFlow.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TaskItem>>> GetAll()
+        public async Task<ActionResult<IEnumerable<TaskReadDto>>> GetAll()
         {
             return Ok(await _service.GetAllAsync());
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<TaskItem>> GetById(Guid id)
+        public async Task<ActionResult<TaskReadDto>> GetById(Guid id)
         {
             var task = await _service.GetByIdAsync(id);
             return task is null ? NotFound() : Ok(task);
         }
         [HttpPost]
-        public async Task<ActionResult<TaskItem>> Create(TaskItem task)
+        public async Task<ActionResult<TaskReadDto>> Create(TaskCreateDto task)
         {
             var created = await _service.CreateAsync(task);
             if(created is null)
@@ -34,7 +35,7 @@ namespace DeskFlow.API.Controllers
             return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(Guid id, TaskItem updated)
+        public async Task<IActionResult> Update(Guid id, TaskCreateDto updated)
         {
             var success = await _service.UpdateAsync(id, updated);
             return success ? NoContent() : NotFound();

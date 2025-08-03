@@ -1,7 +1,9 @@
 ﻿using DeskFlow.Shared.Models;
 using DeskFlow.Application.Interfaces;
 using DeskFlow.Infrastructure.Persistence;
+using DeskFlow.Application.DTOs;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 
 namespace DeskFlow.Application.Services
 {
@@ -9,37 +11,45 @@ namespace DeskFlow.Application.Services
     {
         private readonly AppDbContext _context;
         private readonly IProjectService _projectService;
+        private readonly IMapper _mapper;
 
-        public TaskService(AppDbContext context, IProjectService projectService)
+        public TaskService(AppDbContext context, IProjectService projectService, IMapper mapper)
         {
             _context = context;
             _projectService = projectService;
+            _mapper = mapper;
         }
 
-        public async Task<IEnumerable<TaskItem>> GetAllAsync() => await _context.Tasks.ToListAsync();
-        public async Task<TaskItem?> GetByIdAsync(Guid id) => await _context.Tasks.FindAsync(id);
-        public async Task<TaskItem?> CreateAsync(TaskItem task)
+        public async Task<IEnumerable<TaskReadDto>> GetAllAsync()
         {
-            if (await _projectService.GetByIdAsync(task.ProjectId) is null)
+            var tasks = await _context.Tasks.ToListAsync();
+            return _mapper.Map<IEnumerable<TaskReadDto>>(tasks);
+        } 
+        public async Task<TaskReadDto?> GetByIdAsync(Guid id) 
+        {
+            var task = await _context.Tasks.FindAsync(id);
+            return task is null ? null : _mapper.Map<TaskReadDto>(task);
+        } 
+        public async Task<TaskReadDto?> CreateAsync(TaskCreateDto dto)
+        {
+            if (await _projectService.GetByIdAsync(dto.ProjectId) is null)
                 return null;
 
+            var task = _mapper.Map<TaskItem>(dto);
             task.Id = Guid.NewGuid();
             task.CreatedAt = DateTime.UtcNow;
+
             _context.Tasks.Add(task);
             await _context.SaveChangesAsync();
-            return task;
+
+            return _mapper.Map<TaskReadDto>(task);
         }
-        public async Task<bool> UpdateAsync(Guid id, TaskItem updated)
+        public async Task<bool> UpdateAsync(Guid id, TaskCreateDto dto)
         {
             var task = await _context.Tasks.FindAsync(id);
             if (task is null) return false;
 
-            task.Title = updated.Title;
-            task.Description = updated.Description;
-            task.DueDate = updated.DueDate;
-            task.Status = updated.Status;
-            task.ProjectId = updated.ProjectId;
-
+            _mapper.Map(dto, task);
             await _context.SaveChangesAsync();
 
             return true;

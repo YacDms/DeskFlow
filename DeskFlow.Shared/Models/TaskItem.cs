@@ -10,8 +10,8 @@ namespace DeskFlow.Shared.Models
         public string? Description { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime? DueDate { get; set; }
-        public TaskStatus Status { get; set; } = TaskStatus.Todo;
-        [JsonIgnore]
+        public TaskState Status { get; set; } = TaskState.Todo;
+        //[JsonIgnore]
         public Project? Project { get; set; }
     }
 }
