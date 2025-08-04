@@ -1,14 +1,14 @@
-﻿using DeskFlow.Shared.Models;
+﻿using DeskFlow.Application.DTOs.Project;
 
 namespace DeskFlow.Application.Interfaces
 {
     public interface IProjectService
     {
-        Task<IEnumerable<Project>> GetAllAsync();
-        Task<Project?> GetByIdAsync(Guid id);
-        Task<Project?> GetDetailedByIdAsync(Guid id);
-        Task<Project> CreateAsync(Project project);
-        Task<bool> UpdateAsync(Guid id, Project updated);
+        Task<IEnumerable<ProjectReadDto>> GetAllAsync();
+        Task<ProjectReadDto?> GetByIdAsync(Guid id);
+        Task<ProjectReadDetailsDto?> GetDetailedByIdAsync(Guid id);
+        Task<ProjectReadDto> CreateAsync(ProjectCreateDto project);
+        Task<bool> UpdateAsync(Guid id, ProjectCreateDto updated);
         Task<bool> DeleteAsync(Guid id);
     }
 }
