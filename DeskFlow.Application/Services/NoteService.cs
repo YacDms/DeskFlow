@@ -2,6 +2,8 @@
 using DeskFlow.Application.Interfaces;
 using DeskFlow.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using DeskFlow.Application.DTOs.Note;
+using AutoMapper;
 
 namespace DeskFlow.Application.Services
 {
@@ -9,34 +11,45 @@ namespace DeskFlow.Application.Services
     {
         private readonly AppDbContext _context;
         private readonly IProjectService _projectService;
+        private readonly IMapper _mapper;
 
-        public NoteService(AppDbContext context, IProjectService projectService)
+        public NoteService(AppDbContext context, IProjectService projectService, IMapper mapper)
         {
             _context = context;
             _projectService = projectService;
+            _mapper = mapper;
         }
 
-        public async Task<IEnumerable<Note>> GetAllAsync() => await _context.Notes.ToListAsync();
-        public async Task<Note?> GetByIdAsync(Guid id) => await _context.Notes.FindAsync(id);
-        public async Task<Note?> CreateAsync(Note note)
+        public async Task<IEnumerable<NoteReadDto>> GetAllAsync()
         {
-            if (await _projectService.GetByIdAsync(note.ProjectId) is null) return null;
+            var notes = await _context.Notes.ToListAsync();
+            return _mapper.Map<IEnumerable<NoteReadDto>>(notes);
+        }
+        public async Task<NoteReadDto?> GetByIdAsync(Guid id)
+        {
+            var note = await _context.Notes.FindAsync(id);
+            return note is null ? null : _mapper.Map<NoteReadDto>(note);
+        } 
+        public async Task<NoteReadDto?> CreateAsync(NoteCreateDto dto)
+        {
+            if (await _projectService.GetByIdAsync(dto.ProjectId) is null)
+                return null;
 
+            var note = _mapper.Map<Note>(dto);
             note.Id = Guid.NewGuid();
             note.CreateAt = DateTime.UtcNow;
 
             _context.Notes.Add(note);
             await _context.SaveChangesAsync();
 
-            return note;
+            return _mapper.Map<NoteReadDto>(note);
         }
-        public async Task<bool> UpdateAsync(Guid id, Note updated)
+        public async Task<bool> UpdateAsync(Guid id, NoteCreateDto dto)
         {
             var note = await _context.Notes.FindAsync(id);
             if (note is null) return false;
 
-            note.ProjectId = updated.ProjectId;
-            note.Content = updated.Content;
+            _mapper.Map(dto, note);
 
             await _context.SaveChangesAsync();
 

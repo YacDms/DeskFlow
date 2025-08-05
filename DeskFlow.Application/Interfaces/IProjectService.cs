@@ -7,8 +7,8 @@ namespace DeskFlow.Application.Interfaces
         Task<IEnumerable<ProjectReadDto>> GetAllAsync();
         Task<ProjectReadDto?> GetByIdAsync(Guid id);
         Task<ProjectReadDetailsDto?> GetDetailedByIdAsync(Guid id);
-        Task<ProjectReadDto> CreateAsync(ProjectCreateDto project);
-        Task<bool> UpdateAsync(Guid id, ProjectCreateDto updated);
+        Task<ProjectReadDto> CreateAsync(ProjectCreateDto dto);
+        Task<bool> UpdateAsync(Guid id, ProjectCreateDto dto);
         Task<bool> DeleteAsync(Guid id);
     }
 }

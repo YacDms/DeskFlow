@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using DeskFlow.Application.Interfaces;
-using DeskFlow.Shared.Models;
+using DeskFlow.Application.DTOs.Note;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DeskFlow.API.Controllers
@@ -16,28 +16,28 @@ namespace DeskFlow.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Note>>> GetAll() => Ok(await _service.GetAllAsync());
+        public async Task<ActionResult<IEnumerable<NoteReadDto>>> GetAll() => Ok(await _service.GetAllAsync());
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Note>> GetById(Guid id)
+        public async Task<ActionResult<NoteReadDto>> GetById(Guid id)
         {
             var note = await _service.GetByIdAsync(id);
             return note is null ? NotFound() : Ok(note);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Note>> Create(Note note)
+        public async Task<ActionResult<NoteReadDto>> Create(NoteCreateDto dto)
         {
-            var created = await _service.CreateAsync(note);
+            var created = await _service.CreateAsync(dto);
             if (created is null)
                 return BadRequest(new { error = "Project not found !" });
             return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(Guid id, Note updated)
+        public async Task<IActionResult> Update(Guid id, NoteCreateDto dto)
         {
-            var success = await _service.UpdateAsync(id, updated);
+            var success = await _service.UpdateAsync(id, dto);
             return success ? NoContent() : NotFound();
         }
 

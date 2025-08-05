@@ -1,4 +1,6 @@
-﻿namespace DeskFlow.Application.DTOs.Project
+﻿using DeskFlow.Shared.Models;
+
+namespace DeskFlow.Application.DTOs.Project
 {
     public class ProjectReadDto
     {
@@ -6,7 +8,7 @@
         public string Title { get; set; } = default!; 
         public string? Description { get; set; }
         public DateTime? DueDate { get; set; }
-        public string Status { get; set; } = default!;
+        public ProjectStatus Status { get; set; }
         public DateTime CreatedAt { get; set; }
     }
 }

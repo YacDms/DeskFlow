@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DeskFlow.Application.DTOs.Note;
+using DeskFlow.Shared.Models;
 
 namespace DeskFlow.Application.DTOs.Project
 {
@@ -12,9 +9,10 @@ namespace DeskFlow.Application.DTOs.Project
         public string Title { get; set; } = default!;
         public string? Description { get; set; }
         public DateTime? DueDate { get; set; }
-        public string Status { get; set; } = default!;
+        public ProjectStatus Status { get; set; }
         public DateTime CreatedAt { get; set; }
 
         public List<TaskReadDto> Tasks { get; set; } = new();
+        public List<NoteReadDto> Notes { get; set; } = new();
     }
 }
