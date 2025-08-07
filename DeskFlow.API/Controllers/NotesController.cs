@@ -2,6 +2,7 @@
 using DeskFlow.Application.Interfaces;
 using DeskFlow.Application.DTOs.Note;
 using Microsoft.AspNetCore.Mvc;
+using DeskFlow.Application.Exceptions;
 
 namespace DeskFlow.API.Controllers
 {
@@ -17,6 +18,18 @@ namespace DeskFlow.API.Controllers
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<NoteReadDto>>> GetAll() => Ok(await _service.GetAllAsync());
+
+        [HttpGet("test-error")] // To test catching errors in middleware
+        public IActionResult TestError()
+        {
+            throw new Exception("Erreur simulée !");
+        }
+
+        [HttpGet("NotFoundExpetionTest")] // To test catching NotFoundException in middleware
+        public IActionResult TestNotFound()
+        {
+            throw new NotFoundException("NorFoundException simulée !");
+        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<NoteReadDto>> GetById(Guid id)

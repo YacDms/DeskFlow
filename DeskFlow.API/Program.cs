@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using DeskFlow.Infrastructure;
 using DeskFlow.Application;
+using DeskFlow.API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.UseAuthorization();
 
