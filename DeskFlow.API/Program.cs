@@ -14,7 +14,20 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// CORS
+var DevCors = "_devCors";
+
+builder.Services.AddCors(o =>
+{
+    o.AddPolicy(DevCors, p => p
+        .AllowAnyOrigin()
+        .AllowAnyHeader()
+        .AllowAnyMethod());
+});
+
 var app = builder.Build();
+
+app.UseCors(DevCors); // Use CORS policy
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

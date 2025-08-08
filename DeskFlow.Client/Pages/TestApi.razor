@@ -1,0 +1,27 @@
+﻿@page "/testapi"
+@inject HttpClient Http
+
+<h3>Test API</h3>
+<p>@status</p>
+<button @onclick="CallApi">Appeler l'API</button>
+
+@code {
+    string status = "Idle";
+
+    record ApiResp(string? Message);
+
+    async Task CallApi()
+    {
+        status = "Loading...";
+        try
+        {
+			// Appel à l'API pour tester la réponse
+            var resp = await Http.GetFromJsonAsync<ApiResp>("api/notes/NotFoundExpetionTest");
+            status = resp?.Message ?? "OK";
+        }
+        catch (Exception ex)
+        {
+            status = "Erreur: " + ex.Message;
+        }
+    }
+}
