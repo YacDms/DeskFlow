@@ -1,4 +1,4 @@
-﻿using DeskFlow.Application.DTOs;
+﻿using DeskFlow.Contracts.Tasks;
 
 namespace DeskFlow.Application.Interfaces
 {

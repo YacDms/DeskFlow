@@ -2,7 +2,7 @@
 using DeskFlow.Application.Interfaces;
 using DeskFlow.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-using DeskFlow.Application.DTOs.Note;
+using DeskFlow.Contracts.Notes;
 using AutoMapper;
 
 namespace DeskFlow.Application.Services

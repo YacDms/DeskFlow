@@ -1,4 +1,4 @@
-﻿using DeskFlow.Application.DTOs.Project;
+﻿using DeskFlow.Contracts.Projects;
 using DeskFlow.Shared.Models;
 using DeskFlow.Application.Interfaces;
 using DeskFlow.Infrastructure.Persistence;

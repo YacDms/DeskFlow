@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using DeskFlow.Application.Interfaces;
-using DeskFlow.Application.DTOs.Note;
+﻿using DeskFlow.Application.Interfaces;
+using DeskFlow.Contracts.Notes;
 using Microsoft.AspNetCore.Mvc;
 using DeskFlow.Application.Exceptions;
 

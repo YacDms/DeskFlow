@@ -1,6 +1,6 @@
 ﻿using DeskFlow.Shared.Models;
 
-namespace DeskFlow.Application.DTOs
+namespace DeskFlow.Contracts.Tasks
 {
     public class TaskReadDto
     {

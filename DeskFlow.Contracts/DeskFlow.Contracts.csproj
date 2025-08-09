@@ -7,13 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DeskFlow.Contracts\DeskFlow.Contracts.csproj" />
     <ProjectReference Include="..\DeskFlow.Shared\DeskFlow.Shared.csproj" />
-    <ProjectReference Include="..\DeskFlow.Infrastructure\DeskFlow.Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
   </ItemGroup>
 
 </Project>

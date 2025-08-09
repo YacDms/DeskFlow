@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeskFlow.Infrastructure", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeskFlow.Client", "DeskFlow.Client\DeskFlow.Client.csproj", "{63C0FEC6-B00A-4E9E-A9A9-DA92BD8EB56A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeskFlow.Contracts", "DeskFlow.Contracts\DeskFlow.Contracts.csproj", "{998846D2-25BD-49C6-9086-6DDF61FB333C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{63C0FEC6-B00A-4E9E-A9A9-DA92BD8EB56A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63C0FEC6-B00A-4E9E-A9A9-DA92BD8EB56A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63C0FEC6-B00A-4E9E-A9A9-DA92BD8EB56A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{998846D2-25BD-49C6-9086-6DDF61FB333C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{998846D2-25BD-49C6-9086-6DDF61FB333C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{998846D2-25BD-49C6-9086-6DDF61FB333C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{998846D2-25BD-49C6-9086-6DDF61FB333C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,4 @@
-﻿namespace DeskFlow.Application.DTOs.Note
+﻿namespace DeskFlow.Contracts.Notes
 {
     public class NoteReadDto
     {

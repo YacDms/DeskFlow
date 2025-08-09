@@ -1,4 +1,4 @@
-﻿namespace DeskFlow.Application.DTOs.Project
+﻿namespace DeskFlow.Contracts.Projects
 {
     public class ProjectCreateDto
     {

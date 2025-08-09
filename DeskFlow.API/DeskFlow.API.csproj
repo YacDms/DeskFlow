@@ -18,7 +18,6 @@
   <ItemGroup>
     <ProjectReference Include="..\DeskFlow.Application\DeskFlow.Application.csproj" />
     <ProjectReference Include="..\DeskFlow.Infrastructure\DeskFlow.Infrastructure.csproj" />
-    <ProjectReference Include="..\DeskFlow.Shared\DeskFlow.Shared.csproj" />
   </ItemGroup>
 
 </Project>

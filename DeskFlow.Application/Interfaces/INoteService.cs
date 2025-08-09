@@ -1,4 +1,4 @@
-﻿using DeskFlow.Application.DTOs.Note;
+﻿using DeskFlow.Contracts.Notes;
 
 namespace DeskFlow.Application.Interfaces
 {

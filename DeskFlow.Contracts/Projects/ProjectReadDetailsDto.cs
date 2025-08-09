@@ -1,7 +1,8 @@
-﻿using DeskFlow.Application.DTOs.Note;
+﻿using DeskFlow.Contracts.Notes;
+using DeskFlow.Contracts.Tasks;
 using DeskFlow.Shared.Models;
 
-namespace DeskFlow.Application.DTOs.Project
+namespace DeskFlow.Contracts.Projects
 {
     public class ProjectReadDetailsDto
     {

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using DeskFlow.Application.DTOs;
+using DeskFlow.Contracts.Tasks;
 using DeskFlow.Shared.Models;
 
 namespace DeskFlow.Application.Mapping

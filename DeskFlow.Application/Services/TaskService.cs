@@ -1,7 +1,7 @@
 ﻿using DeskFlow.Shared.Models;
 using DeskFlow.Application.Interfaces;
 using DeskFlow.Infrastructure.Persistence;
-using DeskFlow.Application.DTOs;
+using DeskFlow.Contracts.Tasks;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 

@@ -1,4 +1,4 @@
-﻿namespace DeskFlow.Application.DTOs
+﻿namespace DeskFlow.Contracts.Tasks
 {
     public class TaskCreateDto
     {

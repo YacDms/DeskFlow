@@ -1,6 +1,5 @@
 ﻿using DeskFlow.Application.Interfaces;
-using DeskFlow.Application.DTOs;
-using DeskFlow.Shared.Models;
+using DeskFlow.Contracts.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DeskFlow.API.Controllers
