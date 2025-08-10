@@ -1,0 +1,50 @@
+﻿<Window x:Class="DeskFlow.Desktop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DeskFlow Desktop" Height="650" Width="1000"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource AppBackgroundBrush}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <!-- Sidebar -->
+            <ColumnDefinition Width="*"/>
+            <!-- Content -->
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <!-- Header -->
+            <RowDefinition Height="*"/>
+            <!-- Body -->
+        </Grid.RowDefinitions>
+
+        <!-- Sidebar -->
+        <Border Grid.RowSpan="2" Background="{StaticResource SidebarBrush}">
+            <StackPanel>
+                <TextBlock Text="DESKFLOW" Margin="16,16,16,8"
+                           FontSize="18" FontWeight="Bold"
+                           Foreground="{StaticResource TextOnDarkBrush}"/>
+                <Separator Margin="12" Background="#2A2F3A"/>
+
+                <!-- Navigation (temporaire via code-behind) -->
+                <Button Style="{StaticResource NavButton}" Content="Dashboard" Click="Nav_Dashboard"/>
+                <Button Style="{StaticResource NavButton}" Content="Projets"   Click="Nav_Projects"/>
+                <Button Style="{StaticResource NavButton}" Content="Tâches"    Click="Nav_Tasks"/>
+                <Button Style="{StaticResource NavButton}" Content="Notes"     Click="Nav_Notes"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Header -->
+        <Border Grid.Column="1" Background="{StaticResource HeaderBrush}">
+            <DockPanel LastChildFill="False">
+                <TextBlock Text="Bienvenue" Margin="15" Foreground="White" FontWeight="SemiBold"/>
+                <Button Content="Nouveau" Style="{StaticResource PrimaryButton}" DockPanel.Dock="Right" Margin="12,6"/>
+            </DockPanel>
+        </Border>
+
+        <!-- Content Frame -->
+        <Frame x:Name="MainFrame"
+               Grid.Column="1" Grid.Row="1"
+               NavigationUIVisibility="Hidden"/>
+    </Grid>
+</Window>
